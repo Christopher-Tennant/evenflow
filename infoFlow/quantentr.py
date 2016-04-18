@@ -16,8 +16,8 @@ def quantentr(x,quantlvl):
     if quantstep == 0:
         xquant = np.zeros(shape=np.shape(x))
     else:
-        partition = list(range(xmin+quantstep,xmax-quantstep+1,quantstep))
-        xquant = qtz.quantize(x,partition,range(0,quantlvl-1),1)
+        partition = list(range(int(xmin+quantstep),int(xmax-quantstep+1),int(quantstep)))
+        xquant = qtz.quantize(x,partition,range(0,quantlvl-1))
 
-        assert isinstance(xquant, np.array)
+    
         return xquant

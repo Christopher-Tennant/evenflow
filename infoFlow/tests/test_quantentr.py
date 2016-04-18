@@ -1,5 +1,5 @@
 import numpy as np
-from infoflow import quantentr
+from infoflow import quantentr as qtr
 
 
 def test_quantentr():
@@ -13,7 +13,7 @@ def test_quantentr():
          27, 39, 31, 170, 93, 20, 73, 111, 76, 190, 188, 61, 114, 140, 115, 66, 143, 41, 202, 85, 123, 46, 18, 171, 108,
          130, 6, 135, 193, 144, 175, 191, 184, 21, 60, 15, 148, 198, 185, 159, 37, 36, 88, 98, 153, 200, 97, 101, 176,
          174, 9, 68, 70, 33, 50, 107, 179, 154, 160, 44, 146, 186, 25, 199, 180, 29, 136, 47, 65, 52, 64, 58, 55, 69,
-         139, 195, 16, 95])
+         139, 195, 16, 95]).reshape(1,202)
 
     y = np.array(
         [1, 2, 122, 32, 25, 78, 159, 121, 110, 66, 51, 144, 138, 36, 13, 177, 99, 85, 145, 93, 115, 147, 11, 129, 98,
@@ -24,7 +24,7 @@ def test_quantentr():
          101, 168, 73, 23, 57, 22, 166, 95, 29, 90, 49, 114, 187, 188, 50, 81, 135, 103, 70, 173, 31, 202, 80, 133, 46,
          26, 178, 127, 120, 124, 150, 197, 151, 132, 185, 162, 18, 97, 12, 149, 199, 191, 163, 37, 53, 107, 86, 169,
          180, 102, 109, 172, 134, 7, 40, 47, 21, 96, 111, 184, 158, 189, 39, 140, 190, 59, 152, 182, 28, 126, 45, 54,
-         52, 67, 75, 43, 63, 117, 198])
+         52, 67, 75, 43, 63, 117, 198]).reshape(1,202)
     # number of quantization levels
     q = 10
 
@@ -45,9 +45,9 @@ def test_quantentr():
          1, 6, 9, 2, 7, 9, 1, 6, 2, 2, 2, 3, 3, 2, 3, 5, 9])
 
     # get quantization indices for x
-    xq_check = qtz.quantize(x,q)
-    yq_check = qtz.quantize(y,q)
+    xq_check = qtr.quantentr(x,q)
+    yq_check = qtr.quantentr(y,q)
 
     # check answers
-    assert np.isclose(xq_check,xq)
-    assert np.isclose(yq_check,yq)
+    assert np.isclose(xq_check,xq).all()
+    assert np.isclose(yq_check,yq).all()
